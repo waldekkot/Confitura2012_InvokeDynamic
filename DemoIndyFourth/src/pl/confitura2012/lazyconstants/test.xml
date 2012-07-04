@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<company>
+	<employee>
+		<firstName>Waldek</firstName>
+		<lastName>Kot</lastName>
+		<salary>100000</salary>
+		<notes>This is just a sample !</notes>
+	</employee>
+</company>
