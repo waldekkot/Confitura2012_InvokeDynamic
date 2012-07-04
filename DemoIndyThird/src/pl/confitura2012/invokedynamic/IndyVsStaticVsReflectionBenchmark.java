@@ -2,25 +2,49 @@ package pl.confitura2012.invokedynamic;
 
 import java.lang.invoke.CallSite;
 import java.lang.invoke.ConstantCallSite;
-import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodHandles.Lookup;
 import java.lang.invoke.MethodType;
 import java.lang.reflect.Method;
 
+/**
+ * InvokeDynamic class allows to use the JSR-292's (aka 'InvokeDynamic') dynamic method invocations mechanism from a regular Java code.
+ * The public methods in the class generate (using ASM bytecode generator) a new class with a single method which contains 
+ * InvokeDynamic bytecode instruction. The InvokeDynamic instruction is configured (e.g. its BSM) with the given parameters.
+ * Regular Java code can then call the generated method and in the end the dynamic method invocation is performed.
+ * <p/>
+ * Access to the dynamic call is given in two forms as: <ol> 
+ * <li> MethodHandle (using the method: {@link InvokeDynamic#prepare}) </li>  
+ * <li> instance of given functional interface (using the method: {@link InvokeDynamic#prepareAs}) </li></ol>
+ * <p/>
+ * The code below is for educational purposes (e.g. used during the Confitura 2012 conference: http://confitura.pl).
+ * The code is motivated by the InvokeDynamic blog entries at <a href='http://nerds-central.blogspot.com'>http://nerds-central.blogspot.com</a> 
+ * 
+ * @author      Waldek Kot
+ * @version     %I%, %G%
+ */
 public class IndyVsStaticVsReflectionBenchmark {
 	public interface IExecutable {
 		public long execute(long a, long b, int multiplier);
 	}
 	
+	/**
+	 * The (timeconsuming) method used during the benchmarks. 
+	 */	
 	public static long sumAndMultiply(long a, long b, int multiplier) {
 		return multiplier * (a + b);
 	}
 
+	/**
+	 * Variant of the benchmark method (to demonstrate how removal of boxing affects the performance of reflective method invocation).   
+	 */	
 	public static Long sumAndMultiplyLong(Long a, Long b, int multiplier) {
 		return multiplier * (a + b);
 	}
 
+	/**
+	 * BSM - bootstrap method 
+	 */	
 	public static CallSite myBSM(MethodHandles.Lookup caller, String methodName, MethodType methodType, Object... bsmArgs) {
 		java.lang.reflect.Method m = null;
 		try {
@@ -32,7 +56,6 @@ public class IndyVsStaticVsReflectionBenchmark {
 		}
 		return null;
 	}
-
 	
 	public static void main(String args[]) throws Throwable {
 		IExecutable obj = InvokeDynamic.prepareAs(	IExecutable.class,
@@ -50,21 +73,6 @@ public class IndyVsStaticVsReflectionBenchmark {
 	final static long NUMBER_OF_REPEATS = 5;
 	final static int MULTIPLIER = 2;
 
-	public static void BenchmarkInvokeDynamic(MethodHandle mh) throws Throwable
-	{
-		System.out.println("\nBenchmark INVOKE DYNAMIC (as MethodHandle)");
-		for (int i = 0; i < NUMBER_OF_REPEATS; i++) {
-			long start = System.currentTimeMillis();
-			long sum = 0;
-			for (long x = 0; x < NUMBER_OF_LOOPS; x++) {
-				for (long y = 0; y < NUMBER_OF_LOOPS; y++) {
-					sum += (long) mh.invokeExact(x, y, MULTIPLIER);
-				}
-			}
-			System.out.println(sum + ", TIME: " + (System.currentTimeMillis() - start) + " ms");
-		}
-	}
-	
 	public static void BenchmarkInvokeDynamic(IExecutable exec)
 	{
 		System.out.println("\nBenchmark INVOKE DYNAMIC (as interface)");

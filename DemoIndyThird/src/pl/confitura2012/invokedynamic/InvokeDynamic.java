@@ -22,10 +22,10 @@ import org.objectweb.asm.Type;
  * <li> MethodHandle (using the method: {@link InvokeDynamic#prepare}) </li>  
  * <li> instance of given functional interface (using the method: {@link InvokeDynamic#prepareAs}) </li></ol>
  * <p/>
- * The code below is for educational purposes (e.g. used during the Confitura 2012 conference: http://confitura.pl).
- * The code is based on the brilliant examples from various sources, including:
- * - http://code.google.com/p/jsr292-cookbook
- * - http://nerds-central.blogspot.com 
+ * The code below is for educational purposes (e.g. used during the <a href='http://confitura.pl'>Confitura 2012 conference</a>).
+ * The code is based on the brilliant examples from various sources, including:<ul>
+ * <li><a href='http://code.google.com/p/jsr292-cookbook'>http://code.google.com/p/jsr292-cookbook</a></li>
+ * <li><a href='http://nerds-central.blogspot.com'>http://nerds-central.blogspot.com</a></li></ul>
  * 
  * @author      Waldek Kot
  * @version     %I%, %G%
