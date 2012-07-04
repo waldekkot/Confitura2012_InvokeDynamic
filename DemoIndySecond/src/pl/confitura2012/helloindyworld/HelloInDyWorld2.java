@@ -35,7 +35,8 @@ public class HelloInDyWorld2 {
 	
 	public static void main(String args[]) throws Throwable {
 		MethodHandle mh = InvokeDynamic.prepare("run me", MethodType.methodType(String.class, String.class), 
-												"myBSM", HelloInDyWorld2.class, MethodType.methodType(CallSite.class, Lookup.class, String.class, MethodType.class, Object[].class));
+												"myBSM", HelloInDyWorld2.class, 
+												MethodType.methodType(CallSite.class, Lookup.class, String.class, MethodType.class, Object[].class));
 		System.out.println(mh.invoke("Confitura"));
 
 		MethodHandle mh2 = InvokeDynamic.prepare("run me two", MethodType.methodType(String.class, String.class), 

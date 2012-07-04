@@ -12,13 +12,9 @@ public class HelloInDyWorld3 {
 		public String execute(String s);
 	}
 
-	public static String myConfituraMethod(String s) {
-		return s + " 2012";
-	}
+	public static String myConfituraMethod(String s) { return s + " 2012"; }
 
-	public static String myConfituraMethodNext(String s) {
-		return s + " 2013";
-	}
+	public static String myConfituraMethodNext(String s) { return s + " 2013"; }
 
 	public static CallSite myBSM(MethodHandles.Lookup caller, String methodName, MethodType methodType, Object... bsmArgs) {
 		MethodHandle mh = null;
@@ -38,14 +34,6 @@ public class HelloInDyWorld3 {
 	}
 	
 	public static void main(String args[]) throws Throwable {
-		MethodHandle mh = InvokeDynamic.prepare("run me", MethodType.methodType(String.class, String.class), 
-												"myBSM", HelloInDyWorld3.class, MethodType.methodType(CallSite.class, Lookup.class, String.class, MethodType.class, Object[].class));
-		System.out.println(mh.invoke("Confitura"));
-
-		MethodHandle mh2 = InvokeDynamic.prepare("run me two", MethodType.methodType(String.class, String.class), 
-												"myBSM", HelloInDyWorld3.class, MethodType.methodType(CallSite.class, Lookup.class, String.class, MethodType.class, Object[].class), "2013");
-		System.out.println(mh2.invoke("Confitura"));
-		
 		IExecutable myObj = InvokeDynamic.prepareAs(IExecutable.class,
 													"run me", MethodType.methodType(String.class, String.class), 
 													"myBSM", HelloInDyWorld3.class, MethodType.methodType(CallSite.class, Lookup.class, String.class, MethodType.class, Object[].class));
