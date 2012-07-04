@@ -38,7 +38,7 @@ public class IndyVsStaticVsReflectionBenchmark {
 	/**
 	 * Variant of the benchmark method (to demonstrate how removal of boxing affects the performance of reflective method invocation).   
 	 */	
-	public static Long sumAndMultiplyLong(Long a, Long b, int multiplier) {
+	public static Long sumAndMultiplyLong(Long a, Long b, Integer multiplier) {
 		return multiplier * (a + b);
 	}
 
@@ -70,12 +70,12 @@ public class IndyVsStaticVsReflectionBenchmark {
 	
 	
 	final static long NUMBER_OF_LOOPS = 10_000;
-	final static long NUMBER_OF_REPEATS = 5;
+	final static long NUMBER_OF_REPEATS = 7;
 	final static int MULTIPLIER = 2;
 
 	public static void BenchmarkInvokeDynamic(IExecutable exec)
 	{
-		System.out.println("\nBenchmark INVOKE DYNAMIC (as interface)");
+		System.out.println("\nBenchmark INVOKE DYNAMIC");
 		for (int i = 0; i < NUMBER_OF_REPEATS; i++) {
 			long start = System.currentTimeMillis();
 			long sum = 0;
@@ -129,7 +129,7 @@ public class IndyVsStaticVsReflectionBenchmark {
 	{
 		System.out.println("\nBenchmark REFLECTIVE NO BOXING");
 		
-		Method sumAndMultiplyMethod = IndyVsStaticVsReflectionBenchmark.class.getDeclaredMethod("sumAndMultiplyLong", new Class<?>[] { Long.class, Long.class, int.class });
+		Method sumAndMultiplyMethod = IndyVsStaticVsReflectionBenchmark.class.getDeclaredMethod("sumAndMultiplyLong", new Class<?>[] { Long.class, Long.class, Integer.class });
 		Object[] params = new Object[3];
 		
 		for (int i = 0; i < NUMBER_OF_REPEATS; i++) {
