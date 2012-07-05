@@ -33,12 +33,13 @@ public class FibonacciSum {
 
 	public static void main(String[] args) {
 		System.out.println("SUM OF FIRST " + HOW_MANY_NUMBERS + " NUMBERS OF FIBONACCI SEQUENCE USING RECURRENCE !");
+
 		long start = System.currentTimeMillis();
 		long result = 0;
-		for (long i = 0; i < HOW_MANY_NUMBERS; i++) {
+		for (long i = 0; i < HOW_MANY_NUMBERS; i++) 
 			result += fib(i);
-		}
-		System.out.println("RESULT: " + new DecimalFormat("###,###,###,###,###").format(result));
+
 		System.out.println("TIME: " + (System.currentTimeMillis() - start) + " ms");
+		System.out.println("RESULT: " + new DecimalFormat("###,###,###,###,###").format(result));
 	}
 }
