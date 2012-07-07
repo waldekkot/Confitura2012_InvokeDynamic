@@ -13,7 +13,7 @@ import java.util.HashMap;
 /**
  * This example demonstrates how using InvokeDynamic in a clever way, you can speed up a beautiful, but slow recursive code.
  * This example has been stolen from the <a href='http://code.google.com/p/jsr292-cookbook'>JSR292 Cookbook website</a>
- * and slightly adjusted to better suit as educational code during a Confitura 2012 conference talk about InvokeDynamic.
+ * and slightly adjusted, so it suits as an educational code during the Confitura 2012 conference talk about InvokeDynamic.
  * Compared to the other demo, this code uses BigInteger, so much larger sum of Fibonacci sequence numbers can be calculated.
  * <p/>
  * Link to the original brilliant idea: <a href='http://code.google.com/p/jsr292-cookbook/source/browse/trunk/memoize/src/jsr292/cookbook/memoize/'>Memoize</a>
