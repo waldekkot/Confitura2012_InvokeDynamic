@@ -20,7 +20,7 @@ import java.util.HashMap;
  * @version     %I%, %G%
  */
 public class SpeedRecurenceWithIndy {
-	private static final long HOW_MANY_NUMBERS = 110;
+	private static final long HOW_MANY_NUMBERS = 102;
 	private static MethodHandle mhDynamic = null;
 
 	public static long fib(long n) throws Throwable {
@@ -114,6 +114,6 @@ public class SpeedRecurenceWithIndy {
 			result +=  (long) mhDynamic.invokeExact(i);
 		
 		System.out.println("TIME: "  + (System.currentTimeMillis() - start) + " ms");
-		System.out.println("RESULT: " + new DecimalFormat("###,###,###,###,###").format(result));
+		System.out.println("RESULT: " + new DecimalFormat("###,###").format(result));
 	}
 }
